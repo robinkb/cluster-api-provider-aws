@@ -890,6 +890,8 @@ func autoConvert_v1beta1_FargateProfileSpec_To_v1beta2_FargateProfileSpec(in *Fa
 	out.SubnetIDs = *(*[]string)(unsafe.Pointer(&in.SubnetIDs))
 	out.AdditionalTags = *(*apiv1beta2.Tags)(unsafe.Pointer(&in.AdditionalTags))
 	out.RoleName = in.RoleName
+	out.RolePath = in.RolePath
+	out.RolePermissionsBoundary = in.RolePermissionsBoundary
 	out.Selectors = *(*[]v1beta2.FargateSelector)(unsafe.Pointer(&in.Selectors))
 	return nil
 }
@@ -905,8 +907,8 @@ func autoConvert_v1beta2_FargateProfileSpec_To_v1beta1_FargateProfileSpec(in *v1
 	out.SubnetIDs = *(*[]string)(unsafe.Pointer(&in.SubnetIDs))
 	out.AdditionalTags = *(*apiv1beta2.Tags)(unsafe.Pointer(&in.AdditionalTags))
 	out.RoleName = in.RoleName
-	// WARNING: in.RolePath requires manual conversion: does not exist in peer-type
-	// WARNING: in.RolePermissionsBoundary requires manual conversion: does not exist in peer-type
+	out.RolePath = in.RolePath
+	out.RolePermissionsBoundary = in.RolePermissionsBoundary
 	out.Selectors = *(*[]FargateSelector)(unsafe.Pointer(&in.Selectors))
 	return nil
 }
