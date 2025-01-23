@@ -90,10 +90,10 @@ endif
 
 # Release variables
 
-STAGING_REGISTRY ?= gcr.io/k8s-staging-cluster-api-aws
+STAGING_REGISTRY ?= ghcr.io/robinkb
 STAGING_BUCKET ?= k8s-staging-cluster-api-aws
 BUCKET ?= $(STAGING_BUCKET)
-PROD_REGISTRY := registry.k8s.io/cluster-api-aws
+PROD_REGISTRY := ghcr.io/robinkb
 REGISTRY ?= $(STAGING_REGISTRY)
 RELEASE_TAG ?= $(shell git describe --abbrev=0 2>/dev/null)
 PULL_BASE_REF ?= $(RELEASE_TAG) # PULL_BASE_REF will be provided by Prow
@@ -114,7 +114,7 @@ ARCH ?= $(shell go env GOARCH)
 ALL_ARCH ?= amd64 arm arm64 ppc64le s390x
 
 # main controller
-CORE_IMAGE_NAME ?= cluster-api-aws-controller
+CORE_IMAGE_NAME ?= cluster-api-provider-aws
 CORE_CONTROLLER_IMG ?= $(REGISTRY)/$(CORE_IMAGE_NAME)
 CORE_CONTROLLER_PROMOTED_IMG := $(PROD_REGISTRY)/$(CORE_IMAGE_NAME)
 CORE_CONTROLLER_ORIGINAL_IMG := gcr.io/k8s-staging-cluster-api-aws/cluster-api-aws-controller
