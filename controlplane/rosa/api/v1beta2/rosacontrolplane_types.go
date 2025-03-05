@@ -52,6 +52,20 @@ const (
 	AlwaysAcknowledge VersionGateAckType = "AlwaysAcknowledge"
 )
 
+// ChannelGroupType specifies the OpenShift version channel group.
+type ChannelGroupType string
+
+const (
+	// Stable channel group is the default channel group for stable releases.
+	Stable ChannelGroupType = "stable"
+
+	// Candidate channel group is for testing candidate builds.
+	Candidate ChannelGroupType = "candidate"
+
+	// Nightly channel group is for testing nigtly builds.
+	Nightly ChannelGroupType = "nightly"
+)
+
 // RosaControlPlaneSpec defines the desired state of ROSAControlPlane.
 type RosaControlPlaneSpec struct { //nolint: maligned
 	// Cluster name must be valid DNS-1035 label, so it must consist of lower case alphanumeric
@@ -90,6 +104,12 @@ type RosaControlPlaneSpec struct { //nolint: maligned
 
 	// OpenShift semantic version, for example "4.14.5".
 	Version string `json:"version"`
+
+	// OpenShift version channel group, default is stable.
+	//
+	// +kubebuilder:validation:Enum=stable;candidate;nightly
+	// +kubebuilder:default=stable
+	ChannelGroup ChannelGroupType `json:"channelGroup"`
 
 	// VersionGate requires acknowledgment when upgrading ROSA-HCP y-stream versions (e.g., from 4.15 to 4.16).
 	// Default is WaitForAcknowledge.

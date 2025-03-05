@@ -1210,6 +1210,23 @@ spec:
                   instanceState:
                     description: The current state of the instance.
                     type: string
+                  marketType:
+                    description: |-
+                      MarketType specifies the type of market for the EC2 instance. Valid values include:
+                      "OnDemand" (default): The instance runs as a standard OnDemand instance.
+                      "Spot": The instance runs as a Spot instance. When SpotMarketOptions is provided, the marketType defaults to "Spot".
+                      "CapacityBlock": The instance utilizes pre-purchased compute capacity (capacity blocks) with AWS Capacity Reservations.
+                       If this value is selected, CapacityReservationID must be specified to identify the target reservation.
+                      If marketType is not specified and spotMarketOptions is provided, the marketType defaults to "Spot".
+                    enum:
+                    - OnDemand
+                    - Spot
+                    - CapacityBlock
+                    type: string
+                  networkInterfaceType:
+                    description: NetworkInterfaceType is the interface type of the
+                      primary network Interface.
+                    type: string
                   networkInterfaces:
                     description: Specifies ENIs attached to instance
                     items:
@@ -1412,20 +1429,20 @@ spec:
                       description: |-
                         The reason for the condition's last transition in CamelCase.
                         The specific API may choose whether or not this field is considered a guaranteed API.
-                        This field may not be empty.
+                        This field may be empty.
                       type: string
                     severity:
                       description: |-
-                        Severity provides an explicit classification of Reason code, so the users or machines can immediately
+                        severity provides an explicit classification of Reason code, so the users or machines can immediately
                         understand the current situation and act accordingly.
                         The Severity field MUST be set only when Status=False.
                       type: string
                     status:
-                      description: Status of the condition, one of True, False, Unknown.
+                      description: status of the condition, one of True, False, Unknown.
                       type: string
                     type:
                       description: |-
-                        Type of condition in CamelCase or in foo.example.com/CamelCase.
+                        type of condition in CamelCase or in foo.example.com/CamelCase.
                         Many .condition.type values are consistent across resources like Available, but because arbitrary conditions
                         can be useful (see .node.status.conditions), the ability to deconflict is important.
                       type: string
@@ -1450,11 +1467,11 @@ spec:
                     attributes:
                       additionalProperties:
                         type: string
-                      description: Attributes is a free form map of attributes an
+                      description: attributes is a free form map of attributes an
                         infrastructure provider might use or require.
                       type: object
                     controlPlane:
-                      description: ControlPlane determines if this failure domain
+                      description: controlPlane determines if this failure domain
                         is suitable for use by control plane machines.
                       type: boolean
                   type: object
@@ -3274,6 +3291,23 @@ spec:
                   instanceState:
                     description: The current state of the instance.
                     type: string
+                  marketType:
+                    description: |-
+                      MarketType specifies the type of market for the EC2 instance. Valid values include:
+                      "OnDemand" (default): The instance runs as a standard OnDemand instance.
+                      "Spot": The instance runs as a Spot instance. When SpotMarketOptions is provided, the marketType defaults to "Spot".
+                      "CapacityBlock": The instance utilizes pre-purchased compute capacity (capacity blocks) with AWS Capacity Reservations.
+                       If this value is selected, CapacityReservationID must be specified to identify the target reservation.
+                      If marketType is not specified and spotMarketOptions is provided, the marketType defaults to "Spot".
+                    enum:
+                    - OnDemand
+                    - Spot
+                    - CapacityBlock
+                    type: string
+                  networkInterfaceType:
+                    description: NetworkInterfaceType is the interface type of the
+                      primary network Interface.
+                    type: string
                   networkInterfaces:
                     description: Specifies ENIs attached to instance
                     items:
@@ -3476,20 +3510,20 @@ spec:
                       description: |-
                         The reason for the condition's last transition in CamelCase.
                         The specific API may choose whether or not this field is considered a guaranteed API.
-                        This field may not be empty.
+                        This field may be empty.
                       type: string
                     severity:
                       description: |-
-                        Severity provides an explicit classification of Reason code, so the users or machines can immediately
+                        severity provides an explicit classification of Reason code, so the users or machines can immediately
                         understand the current situation and act accordingly.
                         The Severity field MUST be set only when Status=False.
                       type: string
                     status:
-                      description: Status of the condition, one of True, False, Unknown.
+                      description: status of the condition, one of True, False, Unknown.
                       type: string
                     type:
                       description: |-
-                        Type of condition in CamelCase or in foo.example.com/CamelCase.
+                        type of condition in CamelCase or in foo.example.com/CamelCase.
                         Many .condition.type values are consistent across resources like Available, but because arbitrary conditions
                         can be useful (see .node.status.conditions), the ability to deconflict is important.
                       type: string
@@ -3514,11 +3548,11 @@ spec:
                     attributes:
                       additionalProperties:
                         type: string
-                      description: Attributes is a free form map of attributes an
+                      description: attributes is a free form map of attributes an
                         infrastructure provider might use or require.
                       type: object
                     controlPlane:
-                      description: ControlPlane determines if this failure domain
+                      description: controlPlane determines if this failure domain
                         is suitable for use by control plane machines.
                       type: boolean
                   type: object
@@ -4105,6 +4139,11 @@ spec:
                   Ready denotes that the AWSManagedControlPlane API Server is ready to
                   receive requests and that the VPC infra is ready.
                 type: boolean
+              version:
+                description: |-
+                  Version represents the minimum Kubernetes version for the control plane machines
+                  in the cluster.
+                type: string
             required:
             - ready
             type: object
